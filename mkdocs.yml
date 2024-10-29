@@ -3,23 +3,27 @@ site_url: https://mflisar.github.io/MKDocsExample/
 repo_url: https://github.com/MFlisar/MKDocsExample
 repo_name: mflisar/MKDocsExample
 
+copyright: Copyright &copy; 2024 Michael Flisar
+
 theme:
   name: material
+  logo: assets/logo.png
+  favicon: assets/logo.png
   font:
     text: Roboto
     code: Roboto Mono
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: blue
-      accent: blue
+      primary: blue grey
+      accent: blue grey
       toggle:
         icon: material/toggle-switch
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate    
       primary: black
-      accent: light blue
+      accent: blue grey
       toggle:
         icon: material/toggle-switch-off-outline
         name: Switch to light mode
@@ -28,9 +32,9 @@ theme:
     - navigation.instant
     - navigation.instant.prefetch
     #- navigation.tracking
-    - navigation.tabs
-    - navigation.tabs.sticky
-    - navigation.sections
+    #- navigation.tabs
+    #- navigation.tabs.sticky
+    #- navigation.sections
     #- navigation.expand
     - navigation.path
     - navigation.footer
@@ -66,7 +70,7 @@ markdown_extensions:
   - pymdownx.snippets:
       url_download: true
       restrict_base_path: false
-      base_path: ["docs/"]
+      #base_path: ["docs/"]
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
@@ -79,7 +83,7 @@ markdown_extensions:
 # Plugins
 plugins:
   - search
-  - social
+  #- social
   - minify:
       minify_html: true
       htmlmin_opts:

@@ -1,12 +1,3 @@
-# Welcome to our Developer Platform
+# About
 
-This contains the documentation for our Developer Platform.
-
-## API
-
-- [v1 API Reference](./versions/v1/reference.md)
-- [v2 API Reference](./versions/v2/reference.md)
-- [v3 API Reference](./versions/v3/reference.md)
-
-- Markdown source: `sample-docs/docs/index.md`
-- Permalink: <https://backstage.github.io/mkdocs-monorepo-plugin/monorepo-example/>
+A simple example documentation for a library.
