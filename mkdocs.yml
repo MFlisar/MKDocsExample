@@ -1,0 +1,7 @@
+site_name: Test
+
+theme:
+  name: material
+
+# auto generate nav!
+# nav
