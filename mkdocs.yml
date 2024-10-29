@@ -87,10 +87,10 @@ plugins:
   #- optimize
   #- privacy
   #- typeset
-  - macros:
-      include_dir: include
-      include_yaml:
-        - projects: _data/projects.yaml
+  #- macros:
+  #    include_dir: include
+  #    include_yaml:
+  #      - projects: _data/projects.yaml
   - glightbox:
       skip_classes:
          - exclude-glightbox
