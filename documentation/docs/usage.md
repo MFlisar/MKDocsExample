@@ -1,0 +1,134 @@
+---
+icon: material/keyboard
+---
+
+!!! info
+
+    Depending on your preferences you must decide yourself if you want to use the timber modules or the non timber modules. My suggestion is to prefer the non timber modules as those will save some space and will allow you to even log in a more flexible way. Despite that, all extensions work with any implementation (timber or non timber one).
+
+#### Initialise the library
+
+=== "Lumberjack Version"
+
+    ```kotlin
+    class App : Application() {
+
+        override fun onCreate() {
+
+            // 1) install the implemantion
+            L.init(LumberjackLogger)
+            
+            // 2) install loggers
+            L.plant(ConsoleLogger())
+            val setup = FileLoggerSetup.Daily.create(this)
+            L.plant(FileLogger(setup))
+        }
+
+    }
+    ```
+
+=== "Timber Version"
+
+    ```kotlin
+    class App : Application() {
+
+        override fun onCreate() {
+        
+            // 1) install the implemantion
+            L.init(TimberLogger)
+            
+            // 2) install loggers (trees) 
+            Timber.plant(ConsoleTree())
+            val setup = FileLoggingSetup.DateFiles.create(this)
+            Timber.plant(FileLoggingTree(setup))
+        }
+
+    }
+    ```
+
+#### Usage
+
+```kotlin
+// wherever you want use one of L.* functions for logging
+// all the functions are implemented as inline functions with lambdas - this means,
+// everything inside the lambda is only executed if the log is really ussed
+
+L.d { "a debug log" }
+L.e { "a error log" }
+L.e(e)
+L.e(e) { "an exception log with an additonal message" }
+L.v { "TEST-LOG - Verbose log..." }
+L.d { "TEST-LOG - Debug log..." }
+L.i { "TEST-LOG - Info log..." }
+L.w { "TEST-LOG - Warn log..." }
+L.e { "TEST-LOG - Error log..." }
+L.wtf { "TEST-LOG - WTF log..." }
+
+// optional tags work like following
+L.tag("LEVEL").d { "Tagged log message..." }
+
+// you can log something optionally like following
+L.logIf { false }?.d { "This will never be logged because logIf evaluates to false..." }
+
+// manual log levels
+L.log(Level.DEBUG) { "Debug level log via L.log instead of L.d" }
+```
+
+#### Filtering Logs
+
+=== "Lumberjack Version"
+
+    ```kotlin
+    // typealias LumberjackFilter = (level: Level, tag: String?, time: Long, fileName: String, className: String, methodName: String, line: Int, msg: String?, throwable: Throwable?) -> Boolean
+    val filter = object : LumberjackFilter {
+        override fun invoke(
+            level: Level,
+            tag: String?,
+            time: Long,
+            fileName: String,
+            className: String,
+            methodName: String,
+            line: Int,
+            msg: String?,
+            throwable: Throwable?
+        ): Boolean {
+            // decide if you want to log this message...
+            return true
+        }
+    }
+    // the filter can then be attached to any logger implementation
+    val consoleLogger = ConsoleLogger(filter = filter)
+    val fileLogger = FileLogger(filter = filter)
+    ```
+
+=== "Timber Version"
+
+    !!! info
+
+        The lumberjack implementation allows you more granular filter options as well as a custom filter for each logger implementation!
+
+    ```kotlin
+    TimberLogger.filter = object: IFilter {
+        override fun isTagEnabled(baseTree: BaseTree, tag: String): Boolean {
+            // decide if you want to log this tag on this tree...
+            return true
+        }
+        override fun isPackageNameEnabled(packageName: String): Boolean {
+            // decide if you want to log if the log comes from a class within the provided package name
+            return true
+        }
+    }
+    ```
+
+#### Other settings
+
+```kotlin
+// if desired you can enable/disable all logs completely 
+// e.g. in a release build like following 
+// => you probably would want to do this inside the application after the init of Lumberjack
+L.enable(BuildConfig.DEBUG)
+
+// Alternatively every logger does support an enabled flag as well
+val consoleLogger = ConsoleLogger(enabled = BuildConfig.DEBUG)
+val fileLogger = FileLogger(enabled = !BuildConfig.DEBUG, ...)
+```

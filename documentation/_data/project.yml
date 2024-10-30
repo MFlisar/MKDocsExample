@@ -1,0 +1,166 @@
+# -------
+# Library
+# -------
+
+library:
+  name: Lumberjack
+  api: 21
+  github: MFlisar/Lumberjack
+  maven: io.github.mflisar.lumberjack
+  multiplatform: true
+
+# ------------
+# Dependencies
+# ------------
+
+dependencies:
+  compose:
+    cmp: 1.7.0
+    compose: 1.7.1
+    material3: 1.3.0
+    experimantal: true
+
+groups:
+  - label: Core
+    gradle-comment: core 
+    modules: [core]
+  - label: Lumberjack
+    gradle-comment: if you want to use the LUMBERJACK logger
+    modules: [implementation-lumberjack, logger-console, logger-file]
+  - label: Extensions
+    gradle-comment: extensions that work with any implementation
+    modules: [extension-feedback, extension-notification, extension-viewer, extension-composeviewer]
+  - label: Timber
+    gradle-comment: if you want to use the TIMBER logger
+    modules: [implementation-timber, timber-logger-console, timber-logger-file]
+
+modules:
+  - name: core
+    description: the core module - must always be included
+    optional: false
+    platforms:
+      android: true
+      ios: true
+      jvm: true
+      info:
+    dependencies: []
+  - name: implementation-lumberjack
+    description: the main implementation of the logger - either this or the timber implementation must always be included
+    optional: false
+    platforms:
+      android: true
+      ios: false
+      jvm: true
+      info:
+    dependencies: []
+  - name: logger-console
+    description: a console logger for the lumberjack implementation
+    optional: true
+    platforms:
+      android: true
+      ios: false
+      jvm: true
+      info:
+    dependencies: []
+  - name: logger-file
+    description: a console logger for the lumberjack implementation
+    optional: true
+    platforms:
+      android: true
+      ios: true
+      jvm: true
+      info:
+    dependencies: []
+  - name: extension-feedback
+    description: an extension for easy email feedbacks
+    optional: true
+    platforms:
+      android: true
+      ios: false
+      jvm: false
+      info:
+    dependencies:
+      - name: FeedbackManager
+        link: https://github.com/MFlisar/FeedbackManager
+        version: 2.0.1
+  - name: extension-notification
+    description: an extension for exception notification with easy email feedbacks on click
+    optional: true
+    platforms:
+      android: true
+      ios: false
+      jvm: false
+      info:
+    dependencies:
+      - name: FeedbackManager
+        link: https://github.com/MFlisar/FeedbackManager
+        version: 2.0.1
+  - name: extension-viewer
+    description: a log viewer based on XML
+    optional: true
+    platforms:
+      android: true
+      ios: false
+      jvm: false
+      info:
+    dependencies:
+      - name: FeedbackManager
+        link: https://github.com/MFlisar/FeedbackManager
+        version: 2.0.1
+      - name: FastScroller
+        link: https://github.com/quiph/RecyclerView-FastScroller
+        version: 1.0.0
+  - name: extension-composeviewer
+    description: a compsoe log viewer
+    optional: true
+    platforms:
+      android: true
+      ios: false
+      jvm: true
+      info:
+    dependencies:
+      - name: FeedbackManager
+        link: https://github.com/MFlisar/FeedbackManager
+        version: 2.0.1
+  - name: implementation-timber
+    description: the main implementation based on timber of the logger - either this or the lumberjack implementation must always be included
+    optional: false
+    platforms:
+      android: true
+      ios: false
+      jvm: true
+      info:
+    dependencies:
+      - name: Timber
+        link: https://github.com/JakeWharton/timber
+        version: 4.7.1
+  - name: timber-logger-console
+    description: a console logger for the timber implementation
+    optional: true
+    platforms:
+      android: true
+      ios: false
+      jvm: true
+      info:
+    dependencies:
+      - name: Timber
+        link: https://github.com/JakeWharton/timber
+        version: 4.7.1
+  - name: timber-logger-file
+    description: a file logger for the timber implementation
+    optional: true
+    platforms:
+      android: true
+      ios: false
+      jvm: true
+      info:
+    dependencies:
+      - name: Timber
+        link: https://github.com/JakeWharton/timber
+        version: 4.7.1
+      - name: SLF4J
+        link: https://www.slf4j.org/
+        version: 2.0.7
+      - name: logback-android
+        link: https://github.com/tony19/logback-android
+        version: 3.0.0

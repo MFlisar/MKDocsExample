@@ -27,4 +27,5 @@ jobs:
             mkdocs-macros-plugin \
             mkdocs-glightbox \
             mkdocs-badges
-      - run: mkdocs gh-deploy --force
+      - run: cd documentation \
+            mkdocs gh-deploy --force

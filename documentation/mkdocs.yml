@@ -1,4 +1,4 @@
-site_name: MKDocsExample
+site_name: MKDocs Example
 site_url: https://mflisar.github.io/MKDocsExample/
 repo_url: https://github.com/MFlisar/MKDocsExample
 repo_name: mflisar/MKDocsExample
@@ -34,11 +34,11 @@ theme:
     #- navigation.tracking
     #- navigation.tabs
     #- navigation.tabs.sticky
-    #- navigation.sections
+    - navigation.sections
     #- navigation.expand
     - navigation.path
     - navigation.footer
-    - navigation.indexes
+    #- navigation.indexes
     - toc.follow
     #- toc.integrate
     - navigation.top
@@ -91,10 +91,10 @@ plugins:
   #- optimize
   #- privacy
   #- typeset
-  #- macros:
-  #    include_dir: include
-  #    include_yaml:
-  #      - projects: _data/projects.yaml
+  - macros:
+      include_dir: _include
+      include_yaml:
+        - project: _data/project.yml
   - glightbox:
       skip_classes:
          - exclude-glightbox
@@ -109,6 +109,28 @@ extra:
 extra_css:
   - stylesheets/extra.css
   
-# auto generate nav!
 # nav
-
+nav:
+  - About: index.md
+  - General:
+    - Dependencies: dependencies.md
+    - Setup: setup.md
+    - Usage: usage.md
+  - Modules:
+    - Core: modules/core.md
+    - Lumberjack:
+      - Implementation: modules/implementation-lumberjack.md
+      - Console Logger: modules/logger-console.md
+      - File Logger: modules/logger-file.md
+    - Extensions:
+      - Feedback: modules/extension-feedback.md
+      - Notification: modules/extension-notification.md
+      - Viewer: modules/extension-viewer.md
+      - Compose Viewer: modules/extension-composeviewer.md
+    - Timber:
+      - Implementation: modules/implementation-timber.md
+      - Console Logger: modules/timber-logger-console.md
+      - File Logger: modules/timber-logger-file.md
+  - More:
+    - Custom Implementations: custom-implementations.md
+    - Other Libraries: other-libraries.md
